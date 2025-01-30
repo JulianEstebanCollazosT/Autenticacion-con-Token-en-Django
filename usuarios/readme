@@ -1,0 +1,32 @@
+Descripcion del proyecto: Creacion de dos endpoints para autenticacion de usuarios por token, y
+validacion de Token para vista protegida de lista de usuarios.
+
+Recordatorio: Agregar correctamente las url's de las vistas en views para su correcto funcionamiento.
+Anexo configuracion de estas por si se es necesario:
+
+from django.contrib import admin
+from django.urls import path
+from usuarios import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('auth/', views.auth, name='auth'),
+    path('user', views.user, name='user'),
+]
+
+Los curls que se utilizaron para probar el buen funcionamiento de la app, fueron los siguientes:
+
+curl -X POST http://127.0.0.1:8000/auth/ \
+     -H "Content-Type: application/json" \
+     -d '{"user": "your_user", "password": "your_password"}'
+
+curl -X GET http://127.0.0.1:8000/user \
+     -H "Authorization: Bearer YOUR_TOKEN" \
+     -H "Content-Type: application/json"
+
+Por supuesto, "your_user", "your_password" y YOUR_TOKEN, deben ser reemplazados por la informacion
+correspondiente segun sea el caso.
+
+Nota: Ese proyecto fue realizado con Django, sin usar rest framework, puesto que en la descripcion de
+la tarea solo mencionaban Django, sin embargo, me gustaria comentar que igual estuve aprendiendo sobre
+rest framework, para proyectos posteriores.
